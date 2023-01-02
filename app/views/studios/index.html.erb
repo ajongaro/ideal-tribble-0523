@@ -5,7 +5,7 @@
     <h3>Studio Name: <%= studio.name %>, Location: <%= studio.location %></h3>
     Movies:<br>
     <% studio.movies.each do |movie| %><br>
-      <div id="movie-<%="#{movie.id}"%>">
+      <div id="movie-<%="#{movie.id}"%>"> 
       - <%= movie.title %>, <%= movie.creation_year %>, <%= movie.genre %><br>
       </div>
     <% end %>

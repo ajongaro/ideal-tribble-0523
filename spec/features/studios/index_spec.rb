@@ -18,7 +18,7 @@ RSpec.describe 'the studio index page', type: :feature do
  describe 'the page' do
     it 'has a list of all studios including name and location' do
       visit '/studios'      
-      save_and_open_page
+
       within("#studio-#{studio1.id}") do
         expect(page).to have_content("Universal, Location: Hollywood, CA")
         expect(page).to have_content("Aladdin, 2006, Animated")
