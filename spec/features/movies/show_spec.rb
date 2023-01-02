@@ -14,10 +14,10 @@ RSpec.describe 'the movie show page', type: :feature do
  let!(:movie6) { Movie.create!(title: "Snow White", creation_year: 2000, genre: "Action", studio: studio1) }
  let!(:movie7) { Movie.create!(title: "Training Day", creation_year: 1997, genre: "Sad", studio: studio3) }
 
- let!(:actor1) { Studio.create!(name: "Brad Pitt", age: 52) }
- let!(:actor2) { Studio.create!(name: "The Whale", age:  16) }
- let!(:actor3) { Studio.create!(name: "Jonah Hill", age: 36) }
- let!(:actor4) { Studio.create!(name: "Elizabeth Hurley", age: 47) }
+ let!(:actor1) { Actor.create!(name: "Brad Pitt", age: 52) }
+ let!(:actor2) { Actor.create!(name: "The Whale", age:  16) }
+ let!(:actor3) { Actor.create!(name: "Jonah Hill", age: 36) }
+ let!(:actor4) { Actor.create!(name: "Elizabeth Hurley", age: 47) }
 
  let!(:movieactor1) { MovieActor.create!(movie: movie1, actor: actor1) }
  let!(:movieactor2) { MovieActor.create!(movie: movie1, actor: actor2) }
@@ -36,14 +36,22 @@ RSpec.describe 'the movie show page', type: :feature do
       visit "/movies/#{movie1.id}"      
       
       within("#movie-info") do
-        expect(page).to have_content("Aladdin")
-        expect(page).to have_content("2006")
-        expect(page).to have_content("Animated")
+        expect(page).to have_content("Title: Aladdin")
+        expect(page).to have_content("Creation Year: 2006")
+        expect(page).to have_content("Genre: Animated")
+        expect(page).to_not have_content("Free Willy")
       end
     end
 
-    xit 'displays a list of all the movies actors from youngest to oldest' do
+    it 'displays a list of all the movies actors from youngest to oldest' do
       visit "/movies/#{movie1.id}"      
+
+      within("#actor-info") do
+        expect(page).to have_content("Brad Pitt, Age: 52")
+        expect(page).to have_content("The Whale, Age: 16")
+        expect(page).to have_content("Jonah Hill, Age: 36")
+        expect(page).to_not have_content("Elizabeth Hurley")
+      end
     end
 
     xit 'displays the average age of all the movies actors' do
