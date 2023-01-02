@@ -1,0 +1,30 @@
+require 'rails_helper'
+
+RSpec.describe 'the studio index page', type: :feature do
+ let!(:studio1) { Studio.create!(name: "Universal", location: "Hollywood, CA") }
+ let!(:studio2) { Studio.create!(name: "Disney", location: "San Mateo, CA") }
+ let!(:studio3) { Studio.create!(name: "Bollywood", location: "Bangalore, IN") }
+ let!(:studio4) { Studio.create!(name: "A24", location: "Redondo Beach, CA") }
+
+ let!(:movie1) { Movie.create!(title: "Aladdin", creation_year: 2006, genre: "Animated", studio: studio1) }
+ let!(:movie2) { Movie.create!(title: "Hunger Games", creation_year: 2000, genre: "Action", studio: studio2) }
+ let!(:movie3) { Movie.create!(title: "Free Willy", creation_year: 1997, genre: "Sad", studio: studio3) }
+ let!(:movie4) { Movie.create!(title: "DIE HARD", creation_year: 1999, genre: "Action", studio: studio4) }
+ let!(:movie5) { Movie.create!(title: "Another", creation_year: 2006, genre: "Animated", studio: studio1) }
+ let!(:movie6) { Movie.create!(title: "Snow White", creation_year: 2000, genre: "Action", studio: studio1) }
+ let!(:movie7) { Movie.create!(title: "Training Day", creation_year: 1997, genre: "Sad", studio: studio3) }
+ let!(:movie8) { Movie.create!(title: "Borne Identity", creation_year: 1999, genre: "Action", studio: studio4) }
+
+ describe 'the page' do
+    it 'has a list of all studios including name and location' do
+      visit '/movies/'      
+
+      within("#studio-#{studio1.id}") do
+        expect(page).to have_content("Universal")
+        expect(page).to have_content("Aladdin")
+        expect(page).to have_content("Another")
+        expect(page).to have_content("Snow White")
+      end
+    end
+  end
+end
