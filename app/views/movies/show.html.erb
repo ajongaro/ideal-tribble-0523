@@ -9,4 +9,6 @@
     <% @movie.actors_by_age.each do |actor| %>
     - <%= actor.name %>, Age: <%= actor.age %><br>
     <% end %>
+    <p>
+    Average Actor Age: <%= @movie.avg_actor_age %>
   </div>
