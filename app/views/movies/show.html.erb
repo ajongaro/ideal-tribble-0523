@@ -1,6 +1,12 @@
-<h1><%= @movie.title %> Show Page</h1>
+<h1><%= @movie.title %> Movie Show Page</h1>
   <div id="movie-info">
     Title: <%= @movie.title %><br>
     Creation Year: <%= @movie.creation_year %><br>
     Genre: <%= @movie.genre %><br>
+  </div>
+  <p>
+  <div id="actor-info">
+    <% @movie.actors.each do |actor| %>
+    - <%= actor.name %>, Age: <%= actor.age %><br>
+    <% end %>
   </div>

@@ -21,15 +21,15 @@ RSpec.describe 'the movie show page', type: :feature do
 
  let!(:movieactor1) { MovieActor.create!(movie: movie1, actor: actor1) }
  let!(:movieactor2) { MovieActor.create!(movie: movie1, actor: actor2) }
- let!(:movieactor2) { MovieActor.create!(movie: movie1, actor: actor3) }
- let!(:movieactor3) { MovieActor.create!(movie: movie2, actor: actor2) }
- let!(:movieactor4) { MovieActor.create!(movie: movie3, actor: actor3) }
- let!(:movieactor5) { MovieActor.create!(movie: movie3, actor: actor4) }
- let!(:movieactor6) { MovieActor.create!(movie: movie4, actor: actor2) }
- let!(:movieactor7) { MovieActor.create!(movie: movie4, actor: actor4) }
- let!(:movieactor8) { MovieActor.create!(movie: movie5, actor: actor1) }
- let!(:movieactor9) { MovieActor.create!(movie: movie6, actor: actor3) }
- let!(:movieactor10) { MovieActor.create!(movie: movie7, actor: actor1) }
+ let!(:movieactor3) { MovieActor.create!(movie: movie1, actor: actor3) }
+ let!(:movieactor4) { MovieActor.create!(movie: movie2, actor: actor2) }
+ let!(:movieactor5) { MovieActor.create!(movie: movie3, actor: actor3) }
+ let!(:movieactor6) { MovieActor.create!(movie: movie3, actor: actor4) }
+ let!(:movieactor7) { MovieActor.create!(movie: movie4, actor: actor2) }
+ let!(:movieactor8) { MovieActor.create!(movie: movie4, actor: actor4) }
+ let!(:movieactor9) { MovieActor.create!(movie: movie5, actor: actor1) }
+ let!(:movieactor10) { MovieActor.create!(movie: movie6, actor: actor3) }
+ let!(:movieactor11) { MovieActor.create!(movie: movie7, actor: actor1) }
 
  describe 'visiting the movie show page' do
     it 'displays the movies title, creation year, and genre' do
@@ -45,12 +45,17 @@ RSpec.describe 'the movie show page', type: :feature do
 
     it 'displays a list of all the movies actors from youngest to oldest' do
       visit "/movies/#{movie1.id}"      
-
       within("#actor-info") do
-        expect(page).to have_content("Brad Pitt, Age: 52")
         expect(page).to have_content("The Whale, Age: 16")
         expect(page).to have_content("Jonah Hill, Age: 36")
+        expect(page).to have_content("Brad Pitt, Age: 52")
         expect(page).to_not have_content("Elizabeth Hurley")
+      end
+
+      within("#actor-info") do
+        expect("The Whale").to appear_before("Jonah Hill")
+        expect("The Whale").to appear_before("Brad Pitt")
+        expect("Jonah Hill").to appear_before("Bradd Pitt")
       end
     end
 
