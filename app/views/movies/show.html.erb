@@ -6,7 +6,7 @@
   </div>
   <p>
   <div id="actor-info">
-    <% @movie.actors.each do |actor| %>
+    <% @movie.actors_by_age.each do |actor| %>
     - <%= actor.name %>, Age: <%= actor.age %><br>
     <% end %>
   </div>

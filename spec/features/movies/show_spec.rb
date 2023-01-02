@@ -55,7 +55,7 @@ RSpec.describe 'the movie show page', type: :feature do
       within("#actor-info") do
         expect("The Whale").to appear_before("Jonah Hill")
         expect("The Whale").to appear_before("Brad Pitt")
-        expect("Jonah Hill").to appear_before("Bradd Pitt")
+        expect("Jonah Hill").to appear_before("Brad Pitt")
       end
     end
 
