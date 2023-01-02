@@ -18,13 +18,21 @@ RSpec.describe 'the studio index page', type: :feature do
  describe 'the page' do
     it 'has a list of all studios including name and location' do
       visit '/studios'      
-
+      save_and_open_page
       within("#studio-#{studio1.id}") do
-        expect(page).to have_content("Universal")
-        expect(page).to have_content("Aladdin")
-        expect(page).to have_content("Another")
-        expect(page).to have_content("Snow White")
+        expect(page).to have_content("Universal, Location: Hollywood, CA")
+        expect(page).to have_content("Aladdin, 2006, Animated")
+        expect(page).to have_content("Another, 2006, Animated")
+        expect(page).to have_content("Snow White, 2000, Action")
+
         expect(page).to_not have_content("DIE HARD")
+      end
+
+      within("#studio-#{studio2.id}") do
+        expect(page).to have_content("Disney, Location: San Mateo, CA")
+        expect(page).to have_content("Hunger Games")
+
+        expect(page).to_not have_content("Aladdin")
       end
     end
 

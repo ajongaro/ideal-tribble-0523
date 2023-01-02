@@ -72,5 +72,29 @@ RSpec.describe 'the movie show page', type: :feature do
         expect(page).to have_content("Average Actor Age: 41.5")
       end
     end
+
+    it 'allows an actor to be added to a movie via form' do
+      visit "/movies/#{movie1.id}"      
+      
+      within("#actor-info") do
+        expect(page).to have_content("The Whale, Age: 16")
+        expect(page).to have_content("Jonah Hill, Age: 36")
+        expect(page).to have_content("Brad Pitt, Age: 52")
+        expect(page).to_not have_content("Elizabeth Hurley")
+      end
+
+      within("#add-actor") do
+        expect(page).to have_field("Actor")
+
+        fill_in("Actor", with: "#{actor4.id}")
+        click_button("Save")
+      end
+
+      expect(current_path).to eq("/movies/#{movie1.id}")
+
+      within("#actor-info") do
+        expect(page).to have_content("Elizabeth Hurley")
+      end
+    end
   end
 end

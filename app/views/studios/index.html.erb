@@ -2,15 +2,15 @@
 
 <% @studios.each do |studio| %>
   <div id="studio-<%="#{studio.id}"%>">
-    Studio Name: <%= studio.name %>, Location: <%= studio.location %><br>
-    <p>
+    <h3>Studio Name: <%= studio.name %>, Location: <%= studio.location %></h3>
     Movies:<br>
     <% studio.movies.each do |movie| %><br>
       <div id="movie-<%="#{movie.id}"%>">
-    - <%= movie.title %>, <%= movie.creation_year %>, <%= movie.genre %>
+      - <%= movie.title %>, <%= movie.creation_year %>, <%= movie.genre %><br>
       </div>
     <% end %>
   </div>
-<% end %><p>
+  <p>
+<% end %>
 
   
